@@ -60,10 +60,7 @@ export const ProblemView = () => {
 
   useEffect(() => {
     if (problemId) {
-      // TODO: remove this setTimeout when firebase integration is merged
-      setTimeout(() =>
-        getSolutions(problemId)
-        , 1000);
+      getSolutions(problemId);
     }
   }, [problemId]);
 
