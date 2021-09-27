@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {colors} from '../colors';
 
-interface Problem {
-  title: string;
-  description: string;
-  upvotes: number;
+export interface Problem {
+  id: string;
+  data: any;
 }
 
 interface Solution {
@@ -36,9 +35,12 @@ export const ProblemView = () => {
   const getProblem = (problemId: string) => {
     // soon: firebase.get(problemId)
     setProblem({
-      title: "Sponge buildup",
-      description: "Oftentimes my household sponges accumulate an awful amount of buildup, how can I solve this?",
-      upvotes: 29,
+      id: '1',
+      data: {
+        title: "Sponge buildup",
+        description: "Oftentimes my household sponges accumulate an awful amount of buildup, how can I solve this?",
+        upvotes: 29,
+      }
     });
   };
 
@@ -86,11 +88,11 @@ export const ProblemView = () => {
       <div className="content-wrapper">
         <div style={{display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <div style={{marginRight: 24, backgroundColor: colors.gold, borderRadius: 48, padding: 24, display: 'flex', flexDirection: 'row'}}>
-            <span>⬆️</span><span>{problem.upvotes}</span>
+            <span>⬆️</span><span>{problem.data.upvotes}</span>
           </div>
           <div>
-            <h1>{problem.title}</h1>
-            <p>{problem.description}</p>
+            <h1>{problem.data.title}</h1>
+            <p>{problem.data.description}</p>
           </div>
         </div>
 

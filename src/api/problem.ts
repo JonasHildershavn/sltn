@@ -7,7 +7,8 @@ const db = getFirestore(app);
 export async function createProblem(title: string, description : string) {
     await addDoc(collection(db, "problems"), {
       title: title,
-      description: description
+      description: description,
+      upvotes: 0,
     });
 }
 
