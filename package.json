@@ -1,5 +1,7 @@
 {
   "name": "sltn",
+  "homepage": "https://jonashildershavn.github.io/sltn/",
+  "start_url": "https://jonashildershavn.github.io/sltn/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
