@@ -7,7 +7,7 @@ const Frontpage = () => {
 };
 
 const About = () => {
-  return <div>Frontpage</div>;
+  return <div>About</div>;
 };
 
 function App() {
