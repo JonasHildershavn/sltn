@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {colors} from '../colors';
+import {getProblem} from '../api/problem';
 
 export interface Problem {
   id: string;
   data: any;
 }
 
-interface Solution {
+interface SolutionInterface {
   title: string;
   description: string;
   upvotes: number;
 }
 
-const Solution = ({solution}: {solution: Solution}) => {
+const Solution = ({solution}: {solution: SolutionInterface}) => {
   return (
     <div style={{marginTop: 8, display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center'}}>
       <div style={{marginRight: 16}}>
@@ -29,20 +30,8 @@ const Solution = ({solution}: {solution: Solution}) => {
 export const ProblemView = () => {
   const {problemId} = useParams<{problemId: string}>();
 
-  const [solutions, setSolutions] = useState<Solution[] | undefined>(undefined);
+  const [solutions, setSolutions] = useState<SolutionInterface[] | undefined>(undefined);
   const [problem, setProblem] = useState<Problem | undefined>(undefined);
-
-  const getProblem = (problemId: string) => {
-    // soon: firebase.get(problemId)
-    setProblem({
-      id: '1',
-      data: {
-        title: "Sponge buildup",
-        description: "Oftentimes my household sponges accumulate an awful amount of buildup, how can I solve this?",
-        upvotes: 29,
-      }
-    });
-  };
 
   const getSolutions = (problemId: string) => {
     // soon: firebase.get(problemId)
@@ -60,21 +49,23 @@ export const ProblemView = () => {
     ]);
   };
 
+  const getSetProblem = async (problemId: string) => {
+    const problem = await getProblem(problemId);
+    setProblem(problem);
+  };
+
   useEffect(() => {
-    // TODO: remove this setTimeout when firebase integration is merged
-    setTimeout(() =>
-      getProblem(problemId)
-      , 1000);
+    getSetProblem(problemId);
   }, [problemId]);
 
   useEffect(() => {
-    if (problem) {
+    if (problemId) {
       // TODO: remove this setTimeout when firebase integration is merged
       setTimeout(() =>
         getSolutions(problemId)
         , 1000);
     }
-  }, [problem]);
+  }, [problemId]);
 
   if (!problem) {
     return (
