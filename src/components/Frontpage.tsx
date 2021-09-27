@@ -1,34 +1,21 @@
 import { Link } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 import { colors } from "../colors";
+import { Problem } from "./ProblemView";
+import { listProblems } from "../api/problem";
 
 export const Frontpage = () => {
-  const questions = [
-    {
-      title: "Do you think humans will ever walk on the sun?",
-      body: "I was just thinking and thought how crazy it was that a person walked on the moon and mars. I was just wonder if you think a person will ever be able to walk on the sun too? I know it's really hot but I'm thinking if you go in the winter when the sun is like 30 degrees I bet they could do it.",
-      upvotes: 420,
-      id: 1,
-    },
-    {
-      title: "Is Christian Bale a Christian since his name is Christian?",
-      body: "His parents must have named him Christian for some reason?",
-      upvotes: 301,
-      id: 2,
-    },
-    {
-      title: "HOW DO I TURN OFF CAPSLOCK?",
-      body: "I ACCIDENTALLY TURNED IT ON YESTERDAY AND I DONT KNOW HOW TO TURN IT BACK OFF. ALL MY FRIENDS ARE MAD BECAUSE THEY THINK I AM SHOUTING AT THEM OVER THE INTERNET. THIS PROBLEM IS LITERALLY RUINING MY LIFE AND TEARING MY FAMILY APART THROUGH EMAILS. I JSUT WANT TO BE WHOLE AGAIN. PLEASE HELP!!!",
-      upvotes: 94,
-      id: 3,
-    },
-    {
-      title:
-        "Has Anyone Really Been Far Even as Decided to Use Even Go Want to do Look More Like?",
-      body: "Title says it all.",
-      upvotes: 69,
-      id: 4,
-    },
-  ];
+  const [problems, setProblems] = useState<Problem[] | undefined>(undefined);
+
+  const getProblems = async () => {
+    const problems = await listProblems();
+    setProblems(problems);
+  };
+
+  useEffect(() => {
+    getProblems()
+  }, []);
+
 
   return (
     <div className="content-wrapper">
@@ -37,11 +24,11 @@ export const Frontpage = () => {
       </div>
 
       <div style={{ marginBottom: 32, fontWeight: 100 }}>
-        <em>Top questions, Top answers</em>
+        <em>Top problems, Top answers</em>
       </div>
 
       <div>
-        {questions.map((question) => (
+        {problems && problems.map((problem) => (
           <div
             style={{
               marginBottom: 64,
@@ -68,7 +55,7 @@ export const Frontpage = () => {
                   flexShrink: 0,
                 }}
               >
-                <div style={{ paddingLeft: 4 }}>{question.upvotes} ↑</div>
+                <div style={{ paddingLeft: 4 }}>{problem.data.upvotes} ↑</div>
               </div>
               <div
                 style={{
@@ -76,8 +63,8 @@ export const Frontpage = () => {
                   paddingRight: 16,
                 }}
               >
-                <Link className="title-link" to={"/problems/" + question.id}>
-                  {question.title}
+                <Link className="title-link" to={"/problems/" + problem.id}>
+                  {problem.data.title}
                 </Link>
               </div>
             </div>
@@ -103,7 +90,7 @@ export const Frontpage = () => {
                   height: 64,
                 }}
               />
-              {question.body}
+              {problem.data.description}
             </div>
           </div>
         ))}
