@@ -1,11 +1,7 @@
-import React from "react";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import React from "react"; import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import "./App.css";
-import { Frontpage } from "./components/Frontpage";
-
-const About = () => {
-  return <div>About</div>;
-};
+import {Frontpage} from "./components/Frontpage";
+import {ProblemView} from './components/ProblemView';
 
 function App() {
   return (
@@ -23,21 +19,19 @@ function App() {
             </Link>
           </div>
           <div>
-            <Link to="/about" className="header-item">
-              About
-            </Link>
+            <Link to="/problem/1" className=" header-item">Problems</Link>
           </div>
         </div>
         <Switch>
           <Route path="/" exact={true}>
             <Frontpage />
           </Route>
-          <Route path="/about" exact={true}>
-            <About />
+          <Route path="/problem/:problemId" exact={true}>
+            <ProblemView />
           </Route>
         </Switch>
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
