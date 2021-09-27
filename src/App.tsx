@@ -18,9 +18,6 @@ function App() {
               Home
             </Link>
           </div>
-          <div>
-            <Link to="/problem/1" className=" header-item">Problems</Link>
-          </div>
         </div>
         <Switch>
           <Route path="/" exact={true}>

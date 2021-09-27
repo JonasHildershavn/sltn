@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore/lite";
+import { getFirestore, collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore/lite";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../secrets.json";
 const app = initializeApp(firebaseConfig);
@@ -22,4 +22,19 @@ export async function listProblems() {
     })
   }
   return docs;
+}
+
+export async function getProblem(id: string) {
+  const docSnap = await getDoc(doc(db, "problems", id));
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    return {
+      id,
+      data: docSnap.data(),
+    }
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 }
