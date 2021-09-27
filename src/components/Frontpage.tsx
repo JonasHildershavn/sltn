@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { colors } from "../colors";
 import { Problem } from "./ProblemView";
-import { listProblems } from "../api/problem";
+import { createProblem, listProblems } from "../api/problem";
 
 const CreateForm: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -67,6 +67,14 @@ const CreateForm: React.FC = () => {
             marginBottom: 16,
             padding: "8px 16px",
             marginTop: 8,
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            if (title && description) {
+              createProblem(title, description);
+              setTitle('');
+              setDescription('');
+            }
           }}
         >
           Create
