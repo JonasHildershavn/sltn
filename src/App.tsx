@@ -23,7 +23,7 @@ function App() {
           <Route path="/" exact={true}>
             <Frontpage />
           </Route>
-          <Route path="/problem/:problemId" exact={true}>
+          <Route path="/problems/:problemId" exact={true}>
             <ProblemView />
           </Route>
         </Switch>
