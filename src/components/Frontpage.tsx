@@ -99,25 +99,47 @@ export const Frontpage = () => {
 
   return (
     <div className="content-wrapper">
-      <div style={{ fontSize: 48, marginBottom: 16, fontWeight: 100 }}>
-        SLTN™
-      </div>
+      <div style={{ textAlign: "center" }}>
+        <div
+          style={{
+            fontSize: 48,
+            marginBottom: 32,
+            marginTop: 32,
+            fontWeight: 100,
+          }}
+        >
+          SLTN™
+        </div>
 
-      <div style={{ marginBottom: 32, fontWeight: 100 }}>
-        <em>Top problems, Top answers</em>
+        <div style={{ marginBottom: 32, fontWeight: 100 }}>
+          <em>Top problems, Top answers</em>
+        </div>
       </div>
 
       {!showCreateForm && (
-        <button
-          className="btn"
-          style={{ fontSize: 16, padding: "8px 16px", marginBottom: 16 }}
-          onClick={(e) => {
-            e.preventDefault();
-            setShowCreateForm(true);
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          Create new question
-        </button>
+          <button
+            className="btn"
+            style={{
+              fontSize: 16,
+              padding: "8px 16px",
+              marginTop: 16,
+              marginBottom: 48,
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowCreateForm(true);
+            }}
+          >
+            Create new question
+          </button>
+        </div>
       )}
 
       {showCreateForm && <CreateForm />}
