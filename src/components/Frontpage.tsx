@@ -27,9 +27,11 @@ export const Frontpage = () => {
 
   return (
     <div className="content-wrapper">
-      <div style={{ fontSize: 48, marginBottom: 16 }}>SLTN™</div>
+      <div style={{ fontSize: 48, marginBottom: 16, fontWeight: 100 }}>
+        SLTN™
+      </div>
 
-      <div style={{ marginBottom: 32 }}>
+      <div style={{ marginBottom: 32, fontWeight: 100 }}>
         <em>Top questions, Top answers</em>
       </div>
 
