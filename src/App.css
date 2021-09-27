@@ -21,3 +21,12 @@ html, body {
   margin: 16px;
   border-radius: 16px;
 }
+
+.title-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.title-link:hover {
+  text-decoration: underline;
+}
